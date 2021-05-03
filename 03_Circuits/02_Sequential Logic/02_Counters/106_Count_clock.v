@@ -84,4 +84,49 @@ module top_module(
         end
     end
 
+    // other solution
+    //always @(posedge clk) begin
+    //    if (reset) begin
+    //        pm <= '0;
+    //        hh <= 8'h12;
+    //        mm <= '0;
+    //        ss <= '0;
+    //    end else if (ena) begin
+    //        if (ss < 8'h59) begin
+    //            if (ss[3:0] < 4'h9) begin
+    //                ss[3:0] <= ss[3:0] + 4'h1;
+    //            end else begin
+    //                ss[3:0] <= 4'h0;
+    //                ss[7:4] <= ss[7:4] + 4'h1;
+    //            end
+    //        end else begin
+    //            ss <= 8'h0;
+    //            if (mm < 8'h59) begin
+    //                if (mm[3:0] < 4'h9) begin
+    //                    mm[3:0] <= mm[3:0] + 4'h1;
+    //                end else begin
+    //                    mm[3:0] <= 4'h0;
+    //                    mm[7:4] <= mm[7:4] + 4'h1;
+    //                end
+    //            end else begin
+    //                mm <= 8'h0;
+    //                if (hh < 8'h12) begin            
+    //                    if (hh[3:0] < 4'h9) begin
+    //                        hh[3:0] <= hh[3:0] + 4'h1;
+    //                    end else begin
+    //                        hh[3:0] <= 4'h0;
+    //                        hh[7:4] <= hh[7:4] + 4'h1;
+    //                    end
+    //                end else begin
+    //                    hh <= 8'h1;
+    //                end
+//
+    //                if (hh == 8'h11) begin
+    //                    pm <= ~pm;
+    //                end
+    //            end
+    //        end
+    //    end
+    //end
+
 endmodule
