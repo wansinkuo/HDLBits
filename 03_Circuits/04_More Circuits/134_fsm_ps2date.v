@@ -36,22 +36,14 @@ module top_module(
   always @(posedge clk) begin
     if (reset) begin
       state <= IDLE;
+      out_bytes <= '0;
     end else begin
       state <= next_state;
+      out_bytes <= {out_bytes[15:0],in};
     end
   end
  
     // Output logic
   assign done = (state == DONE);
-  
-  always @(posedge clk) begin
-    if (reset) begin
-      out_bytes <= '0;
-    end else if (in[3] && (state == IDLE || state == DONE)) begin
-      out_bytes <= {out_bytes[15:0],in};
-    end else if (state == BYTE2 || state == BYTE3) begin
-      out_bytes <= {out_bytes[15:0],in};
-    end
-  end
     
 endmodule
