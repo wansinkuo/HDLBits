@@ -5,7 +5,7 @@ module top_module(
     output done
 ); 
 
-  typedef enum {IDLE, START, DATA, STOP, ERR} state_t;
+  typedef enum {IDLE, DATA, STOP, ERR} state_t;
   state_t state, next_state;
   
   always @(*) begin
