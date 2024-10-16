@@ -7,19 +7,17 @@ module top_module(
 
   typedef enum {IDLE, START, DATA, STOP, ERR} state_t;
   state_t state, next_state;
-
+  
   always @(*) begin
     case (state)
       IDLE:
         if (~in) begin
-          next_state = START;
+          next_state = DATA;
         end else begin
           next_state = state;
         end
-      START:
-        next_state = DATA;
       DATA:
-        if (data_cnt == 3'd7) begin
+        if (data_cnt == 4'd8) begin
           if (in) begin
             next_state = STOP;
           end else begin
@@ -30,7 +28,7 @@ module top_module(
         end
       STOP:
         if (~in) begin
-          next_state = START;
+          next_state = DATA;
         end else begin
           next_state = IDLE;
         end
@@ -45,10 +43,10 @@ module top_module(
     endcase
   end
 
-  logic [2:0] data_cnt;
+  logic [3:0] data_cnt;
   always @(posedge clk) begin
     if (state == DATA) begin
-      data_cnt <= data_cnt + 3'd1;
+      data_cnt <= data_cnt + 4'd1;
     end else begin
       data_cnt <= '0;
     end
